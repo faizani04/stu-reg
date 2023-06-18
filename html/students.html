@@ -1,168 +1,189 @@
-student.html----------------------------------------------------------
-
-
 
 <html>
 
-<head>
+    <head>
 
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
 <script>
 
-$(document).ready(function(){
+    $(document).ready(function(){
 
 
-});
 
-function getAllStudent(){
 
-// alert("Api calling...!!!!")
+   
 
-let url="http://127.0.0.1:2020/students/getStudents";
+    });
 
-let data= ''
+    function getAllStudent(){
 
+        // alert("Api calling...!!!!")
 
-$.ajax({
+        let url="http://127.0.0.1:2020/students/getStudents";
 
-type:"GET",
+        let data= ''
 
-url:url,
 
-data:data,
 
-success:"",
 
-}).done(function(data){
+        $.ajax({
 
-// alert("success...")
+           type:"GET",
 
-console.log("Succes data:",data,data.data.length)
+           url:url,
 
+           data:data,
 
-results=data.data;
+           success:"",
 
-let table="<table border=1>";
+        }).done(function(data){
 
-table+=`<tr>
+            //  alert("success...")
 
-<td>#</td>
+            console.log("Succes data:",data,data.data.length)
 
-<td>First Name</td>
 
-<td>Last Name</td>
 
-<td>Email</td>
 
-<td>Mobile</td>
+            results=data.data;
 
-<td>Edit</td>
+   let table="<table border=1>";
 
-<td>Delete</td>
+    table+=`<tr>
 
-</tr>`;
+        <td>#</td>
 
-for(let i=0;i<data.data.length;i++){
+        <td>First Name</td>
 
-console.log(results[i].firstName)
+        <td>Last Name</td>
 
-table+=`<tr>
+        <td>Email</td>
 
-<td>${(1+i)}</td>
+        <td>Mobile</td>
 
-<td>${results[i].firstName}</td>
+        <td>Edit</td>
 
-<td>${results[i].lastName}</td>
+        <td>Delete</td>
 
-<td>${results[i].email}</td>
+        </tr>`;
 
-<td>${results[i].mobileNumber}</td>
+            for(let i=0;i<data.data.length;i++){
 
-<td> <input type="button" value="Edit" onclick="editStudent('${results[i]._id}')" ></td>
+                console.log(results[i].firstName)
 
-<td><input type="button" value="Delete" onclick="deleteStudent('${results[i]._id}')" ></td>
+                table+=`<tr>
 
-</tr>`;
+        <td>${(1+i)}</td>
 
-}
+        <td>${results[i].firstName}</td>
 
-table+="</table>";
+        <td>${results[i].lastName}</td>
 
+        <td>${results[i].email}</td>
 
-// data.foreach(element => {
+        <td>${results[i].mobileNumber}</td>
 
-console.log(table)
+        <td>  <input type="button" value="Edit" onclick="editStudent('${results[i]._id}')" ></td>
 
-// });
+        <td><input type="button" value="Delete" onclick="deleteStudent('${results[i]._id}')" ></td>
 
-$('#tableData').html(table)
+        </tr>`;
 
-$('#total').html(data.data.length)
+            }
 
+             table+="</table>";
 
-})
 
-}
 
-function editStudent(id){
 
-window.open(`edit.html?id=${id}`, "_blank");
+            // data.foreach(element => {
 
-}
+               console.log(table)
 
+            // });
 
-function deleteStudent(id){
+            $('#tableData').html(table)
 
-// alert("Api calling...!!!!")
+            $('#total').html(data.data.length)
 
-let url=`http://127.0.0.1:2020/students/deleteStudentById/${id}`;
 
-// alert(fname);return false;
 
-let data= {}
 
+        })
 
-$.ajax({
+ 
 
-type:"DELETE",
+    }
 
-url:url,
+    function editStudent(id){
 
-data:data,
+        window.open(`edit.html?id=${id}`, "_blank");
 
-success:"",
+    }
 
-}).done(function(data){
 
-// alert("success...")
 
-console.log("Student data:",data)
 
-window.open(`students.html`, "_self");
+    function deleteStudent(id){
 
-})
+        // alert("Api calling...!!!!")
 
-}
+        let url=`http://127.0.0.1:2020/students/deleteStudentById/${id}`;
+
+     
+
+        // alert(fname);return false;
+
+        let data= {}
+
+
+
+
+        $.ajax({
+
+           type:"DELETE",
+
+           url:url,
+
+           data:data,
+
+           success:"",
+
+        }).done(function(data){
+
+            //  alert("success...")
+
+            console.log("Student data:",data)
+
+            window.open(`students.html`, "_self");
+
+        })
+
+    }
 
 </script>
 
-</head>
+    </head>
 
 
-<body onload="getAllStudent()">
 
-<div><h1>Student Details</h1></div>
 
-<div>Total Students: <b></b><span style="color: blue;" id="total"></span></b>
+    <body onload="getAllStudent()">
 
-&nbsp;&nbsp;&nbsp;<a href="registration.html">Add Student</a>
+        <div><h1>Student Details</h1></div>
 
-</div>
+        <div>Total Students: <b></b><span style="color: blue;" id="total"></span></b>
+
+        &nbsp;&nbsp;&nbsp;<a href="registration.html">Add Student</a>
+
+        </div>
 
 <div id="tableData"></div>
 
 
-</body>
+
+
+    </body>
 
 </html>
